@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Facts Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+        #fact {
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: slideIn 0.5s forwards;
+        }
+        #fact.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .science-button {
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            color: white;
+            background: linear-gradient(45deg, #ff4081, #ff1e63);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .science-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+            z-index: 0;
+        }
+        .science-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .science-button:hover {
+            transform: translateY(-5px);
+        }
+        .science-button span {
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Science Facts Generator</h1>
+    <div id="fact">Click the button to generate a fact!</div>
+    <button class="science-button" id="generateFact"><span>Generate a Fact</span></button>
+
+    <script>
+        const factsData = {
+            "science_facts": [
+                { "fact": "Water can boil and freeze at the same time, a phenomenon known as the triple point." },
+                { "fact": "Bananas are berries, but strawberries are not." },
+                { "fact": "The Eiffel Tower can be 15 cm taller during the summer due to thermal expansion." },
+                { "fact": "A day on Venus is longer than a year on Venus." },
+                { "fact": "Humans share 50% of their DNA with bananas." },
+                { "fact": "Octopuses have three hearts and blue blood." },
+                { "fact": "The speed of light is approximately 299,792 kilometers per second." },
+                { "fact": "Honey never spoils; archaeologists have found pots of honey in ancient Egyptian tombs that are over 3000 years old and still edible." },
+                { "fact": "A single teaspoon of honey represents the life work of 12 bees." },
+                { "fact": "The human body contains enough carbon to make 900 pencils." },
+                { "fact": "There are more stars in the universe than grains of sand on all the Earth's beaches." },
+                { "fact": "Sharks are older than trees; they have existed for around 400 million years." },
+                { "fact": "The average person walks the equivalent of five times around the world in their lifetime." },
+                { "fact": "A group of flamingos is called a 'flamboyance.'" },
+                { "fact": "The heart of a blue whale is so large that a human can swim through its arteries." },
+                { "fact": "The Earth's core is as hot as the surface of the sun, around 5,500 degrees Celsius." },
+                { "fact": "Venus is the hottest planet in our solar system, with surface temperatures around 465 degrees Celsius." },
+                { "fact": "The longest living organism is a type of jellyfish that can revert to its juvenile form after maturing." },
+                { "fact": "A day on Mercury lasts longer than a year on Mercury." },
+                { "fact": "The human nose can detect about 1 trillion different scents." },
+                { "fact": "The universe is approximately 13.8 billion years old." },
+                { "fact": "The Great Wall of China is not visible from space without aid." },
+                { "fact": "The average cloud weighs about 1.1 million pounds." },
+                { "fact": "A bolt of lightning contains enough energy to toast 100,000 slices of bread." },
+                { "fact": "The fingerprints of a koala are so similar to humans that they can taint crime scenes." },
+                { "fact": "The world's largest desert is Antarctica." },
+                { "fact": "The shortest war in history was between Britain and Zanzibar on August 27, 1896; Zanzibar surrendered after 38 minutes." }
+            ]
+        };
+
+        document.getElementById('generateFact').addEventListener('click', function() {
+            const randomIndex = Math.floor(Math.random() * factsData.science_facts.length);
+            const factElement = document.getElementById('fact');
+            factElement.innerText = factsData.science_facts[randomIndex].fact;
+            factElement.classList.remove('visible'); // Reset animation
+            void factElement.offsetWidth; // Trigger reflow
+            factElement.classList.add('visible'); // Start animation
+        });
+    </script>
+
+</body>
+</html>
